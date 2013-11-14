@@ -56,6 +56,7 @@ def write_text
 end
 
 check_args
+set_dir
 set_var
 check_existing
 reset_time
