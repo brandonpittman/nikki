@@ -17,22 +17,27 @@ def set_var
 end
 
 def check_args
-	if ARGF.argv[0] == nil
-		puts "No argument passed!"
-		exit
-	end
+    case @arg
+        when nil then puts "No argument passed!"
+        when "-r" then reset_time
+        # when "-R" then get_random
+    end
 end
 
 def check_existing
-    `osascript -e 'tell application "System Events" to display alert "File does not exist!"'` unless File.exists?(@f) == true
+    `osascript -e 'tell application "System Events" to display notification "File does not exist!" with title "kioku.rb"'` unless File.exists?(@f) == true
+end
+
+def get_random
+    # insert code to get random thing learned *and* get the date
 end
 
 def reset_time
-    if @arg == "-r"
+    #if @arg == "-r"
         FileUtils.touch @f, :mtime => Time.now-86400
         print "Modification time reset."
         exit
-    end
+    #end
 end
 
 def check_missed_day
@@ -55,11 +60,9 @@ def write_text
     open(@f, 'a') { |f| f.puts @text }
 end
 
-check_args
-set_dir
 set_var
+check_args
 check_existing
-reset_time
 set_text
 check_missed_day
 write_text
