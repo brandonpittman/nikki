@@ -2,15 +2,9 @@
 
 require 'fileutils'
 
-def set_dir
-    @home = "#{Dir.home}/"
-    @dropbox = "#{@home}Dropbox/"
-    @save_loc = Dir.exists?(@dropbox) ? @dropbox : @home
-end
-
 def set_var
     @year = Time.now.strftime('%Y')
-    @f = "#{@save_loc}.kioku_#{@year}.md"
+    @f = "/Users/brandonpittman/Dropbox/Documents/Markdown/kioku_#{@year}.md"
     @month = Time.now.strftime('%B')
     @day = Time.now.strftime('%e').strip
     @arg = ARGF.argv[0]
@@ -18,26 +12,29 @@ end
 
 def check_args
     case @arg
-        when nil then puts "No argument passed!"
-        when "-r" then reset_time
-        # when "-R" then get_random
+                when nil then puts "No argument passed!"
+                when "-r" then reset_time
+                when "--reset" then reset_time
+                # when "-R" then get_random
     end
 end
 
 def check_existing
-    `osascript -e 'tell application "System Events" to display notification "File does not exist!" with title "kioku.rb"'` unless File.exists?(@f) == true
+    if !File.exists?(@f)
+        # `osascript -e 'tell application "System Events" to display notification "File did not exist!" with title "kioku.rb"'`
+        `touch "#{@f}"`
+    end
 end
 
 def get_random
     # insert code to get random thing learned *and* get the date
+            # to be added later
 end
 
 def reset_time
-    #if @arg == "-r"
         FileUtils.touch @f, :mtime => Time.now-86400
         print "Modification time reset."
         exit
-    #end
 end
 
 def check_missed_day
