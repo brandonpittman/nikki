@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/nikki.png)](http://badge.fury.io/rb/nikki)
+
 # nikki
 
 > "Record something new learned every day of the year."
