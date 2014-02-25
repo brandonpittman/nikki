@@ -1,6 +1,9 @@
+require "time"
+require "pathname"
+
 Given(/^I have a (.+) to make$/) do |arg|
   @text = arg
-  @file = "#{ENV['HOME']}/.nikki_#{Time.now.strftime("%Y")}"
+  @file = Pathname.new("#{ENV['HOME']}/.nikki_#{Time.now.strftime("%Y")}.md")
 end
 
 When(/^I try to (save) my entry$/) do |arg|
@@ -38,4 +41,13 @@ end
 
 Then(/^my (entry) should be appended along with the day of the month$/) do |arg|
   File.open(@file, "a") { |file| file.puts "#{@date.strftime("%d").strip} #{arg}" }
+end
+
+When(/^the mtime of the journal isn't yesterday$/) do
+    today = Date.today
+    @file.mtime.to_date != Date.today-1
+end
+
+Then(/^the journal should open in my editor$/) do
+    %x{open -a 'Sublime Text' #{@file}}
 end

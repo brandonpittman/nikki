@@ -21,3 +21,7 @@ Scenario: I have a journal file and it's *not* the first of the month
   When I try to save my entry
   And it's not the first of the month
   Then my entry should be appended along with the day of the month
+
+Scenario: I didn't update the journal yesterday
+  When the mtime of the journal isn't yesterday
+  Then the journal should open in my editor
