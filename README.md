@@ -22,7 +22,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+kioku help [COMMAND]  # Describe available commands or one specific command
+kioku new ENTRY       # Creates a new entry in the Kioku journal.
 
 ## Contributing
 
