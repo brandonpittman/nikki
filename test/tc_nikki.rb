@@ -1,14 +1,14 @@
 require "minitest/autorun"
 require "minitest/unit"
-require "kioku"
+require "nikki"
 
 class TestCase < MiniTest::Unit::TestCase
 
-  include Kioku
+  include Nikki
 
   def test_file_exist?
-    kioku = Generator.new
-    assert_equal(true,kioku.file_exist?)
+    nikki = Generator.new
+    assert_equal(true,nikki.file_exist?)
   end
 
 end

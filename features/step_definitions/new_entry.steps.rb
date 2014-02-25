@@ -1,6 +1,6 @@
 Given(/^I have a (.+) to make$/) do |arg|
   @text = arg
-  @file = "#{ENV['HOME']}/.kioku_#{Time.now.strftime("%Y")}"
+  @file = "#{ENV['HOME']}/.nikki_#{Time.now.strftime("%Y")}"
 end
 
 When(/^I try to (save) my entry$/) do |arg|

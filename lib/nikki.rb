@@ -1,19 +1,17 @@
-#TODO: test writing to journal
-
 require 'thor'
 require "pathname"
 
-module Kioku
+module Nikki
   class Generator < Thor
 
-    desc "new ENTRY", "Creates a new entry in the Kioku journal."
+    desc "new ENTRY", "Creates a new entry in the Nikki journal."
     def new(entry)
       file.open('a') { |file| file.puts text(entry)}
     end
 
     no_commands do
       def file
-       Pathname.new("#{ENV['HOME']}/.kioku_#{Time.now.strftime("%Y")}.md")
+       Pathname.new("#{ENV['HOME']}/.nikki_#{Time.now.strftime("%Y")}.md")
       end
 
       def file_exist?

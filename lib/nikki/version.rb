@@ -1,3 +1,3 @@
-module Kioku
+module Nikki
   VERSION = "0.1.0"
 end
