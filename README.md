@@ -22,8 +22,8 @@ Or install it yourself as:
 
 ## Usage
 
-kioku help [COMMAND]  # Describe available commands or one specific command
-kioku new ENTRY       # Creates a new entry in the Kioku journal.
+- kioku help [COMMAND]  # Describe available commands or one specific command
+- kioku new ENTRY       # Creates a new entry in the Kioku journal.
 
 ## Contributing
 
