@@ -1,6 +1,7 @@
 #TODO: test writing to journal
 
 require 'thor'
+require "pathname"
 
 module Kioku
   class Generator < Thor
@@ -16,7 +17,12 @@ module Kioku
       end
 
       def file_exist?
-        file.exist?
+        if file.exist?
+          return true
+        else
+          create_file
+          return true
+        end
       end
 
       def create_file
