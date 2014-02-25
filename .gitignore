@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.gem
 *.rbc
 .bundle
@@ -15,3 +16,6 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+=======
+.codekit
+>>>>>>> f81665bccd16c1a42bab86632a3bf9fd4d080625
