@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/nikki.png)](http://badge.fury.io/rb/nikki)
+[![Gem Version](https://badge.fury.io/rb/nikki.png)](http://badge.fury.io/rb/nikki) [![Build Status](https://travis-ci.org/brandonpittman/nikki.png?branch=master)](https://travis-ci.org/brandonpittman/nikki)
 
 # nikki
 
