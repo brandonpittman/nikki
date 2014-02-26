@@ -1,12 +1,18 @@
 require 'thor'
 require "pathname"
+require "date"
+require 'time'
 
 module Nikki
   class Generator < Thor
 
     desc "new ENTRY", "Creates a new entry in the Nikki journal."
     def new(entry)
-      file.open('a') { |file| file.puts text(entry)}
+      if updated_yesterday?
+        file.open('a') { |file| file.puts text(entry)}
+      else
+        %x{open -a TextEdit #{file}}
+      end
     end
 
     no_commands do
@@ -37,6 +43,10 @@ module Nikki
 
       def month
         Time.now.strftime("%B")
+      end
+
+      def updated_yesterday?
+        file.mtime.to_date == Date.today-1
       end
 
       def text(entry)
