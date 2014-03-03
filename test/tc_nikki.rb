@@ -3,7 +3,7 @@ require "minitest/unit"
 require "nikki"
 require 'fileutils'
 
-class NikkiTest < MiniTest::Test
+class NikkiTest < MiniTest::Unit::TestCase
 
   include Nikki
 
