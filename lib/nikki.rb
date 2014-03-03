@@ -2,19 +2,17 @@ require 'thor'
 require "pathname"
 require "yaml"
 require "date"
-require 'time'
 
 module Nikki
   class Generator < Thor
-    @@config = nil
 
     desc "new ENTRY", "Creates a new entry in the Nikki journal."
     def new(entry)
       file.open('a') { |file| file.puts text(entry)}
       open unless updated_yesterday?
-      @@config = config
-      @@config[:updated] = Date.today
-      config_file.open('w') { |t| t << @@config.to_yaml }
+      settings = read_config
+      settings[:updated] = today
+      write_config(settings)
     end
 
     desc "open", "Opens current year's journal file in editor."
@@ -22,12 +20,12 @@ module Nikki
       %x{open -a "#{editor}" #{file}}
     end
 
-    desc "setup", "Change Nikki's settings."
+    desc "config", "Change Nikki's settings."
     option :editor, :aliases => :e
-    def setup
-      @@config = config
-      @@config[:editor] = options[:editor] || 'TextEdit'
-      config_file.open('w') { |t| t << @@config.to_yaml }
+    def config
+      settings = read_config
+      settings[:editor] = options[:editor] || 'TextEdit'
+      write_config(settings)
     end
 
     no_commands do
@@ -41,9 +39,13 @@ module Nikki
         path.join(".nikki.config.yaml")
       end
 
-      def config
+      def read_config
         config_file_exist?
         YAML.load(config_file.read)
+      end
+
+      def write_config(hash)
+        config_file.open('w') { |t| t << hash.to_yaml }
       end
 
       def editor
@@ -91,7 +93,7 @@ module Nikki
       end
 
       def updated_yesterday?
-        config[:updated] == Date.today-1
+        read_config[:updated] == Date.today-1
       end
 
       def text(entry)

@@ -1,8 +1,9 @@
 require "minitest/autorun"
 require "minitest/unit"
 require "nikki"
+require 'fileutils'
 
-class NikkiTest < MiniTest::Unit::TestCase
+class NikkiTest < MiniTest::Test
 
   include Nikki
 
@@ -11,10 +12,13 @@ class NikkiTest < MiniTest::Unit::TestCase
     assert_equal(true,nikki.file_exist?)
   end
 
+  def test_yaml
+    nikki = Generator.new
+    assert(nikki.read_config.class == Hash)
+  end
+
   def test_updated_yesterday?
     nikki = Generator.new
-    file = nikki.file
-    FileUtils.touch(file, :mtime => Time.now-86000)
     assert(nikki.updated_yesterday?)
   end
 
