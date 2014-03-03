@@ -49,7 +49,7 @@ module Nikki
       end
 
       def editor
-        config[:editor]
+        read_config[:editor]
       end
 
       def file

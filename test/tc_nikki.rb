@@ -12,7 +12,7 @@ class NikkiTest < MiniTest::Unit::TestCase
     assert_equal(true,nikki.file_exist?)
   end
 
-  def test_yaml
+  def test_read_config
     nikki = Generator.new
     assert(nikki.read_config.class == Hash)
   end
