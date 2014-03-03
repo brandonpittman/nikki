@@ -8,10 +8,10 @@ module Nikki
 
     desc "new ENTRY", "Creates a new entry in the Nikki journal."
     def new(entry)
-      file.open('a') { |file| file.puts text(entry)}
-      open unless updated_yesterday?
       settings = read_config
       settings[:updated] = today
+      file.open('a') { |file| file.puts text(entry)}
+      open unless updated_yesterday?
       write_config(settings)
     end
 
@@ -70,6 +70,10 @@ module Nikki
 
       def create_config_file
         FileUtils.touch(config_file)
+        settings = {}
+        settings[:updated] = today
+        settings[:editor] = 'TextEdit'
+        write_config(settings)
       end
 
       def create_file
