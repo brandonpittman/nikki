@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/nikki.png)](http://badge.fury.io/rb/nikki) [![Build Status](https://travis-ci.org/brandonpittman/nikki.png?branch=master)](https://travis-ci.org/brandonpittman/nikki)
+[![Gem Version](https://badge.fury.io/rb/nikki.png)](http://badge.fury.io/rb/nikki)
 
 # nikki
 
@@ -24,8 +24,10 @@ Or install it yourself as:
 
 ## Usage
 
-- nikki help [COMMAND]  # Describe available commands or one specific command
-- nikki new ENTRY       # Creates a new entry in the Nikki journal.
+    nikki config          # Change Nikki's settings.
+    nikki help [COMMAND]  # Describe available commands or one specific command
+    nikki new ENTRY       # Creates a new entry in the Nikki journal.
+    nikki open            # Opens current year's journal file in editor.
 
 ## Contributing
 
