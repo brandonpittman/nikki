@@ -7,32 +7,42 @@ module Nikki
   class Generator < Thor
 
     desc "new ENTRY", "Creates a new entry in the Nikki journal."
-    def new(entry)
+    def new(*args)
       settings = read_config
       settings[:updated] = today
+      entry = args.join(" ")
       file.open('a') { |file| file.puts text(entry)}
       open unless updated_yesterday?
       write_config(settings)
     end
 
-    desc "open", "Opens current year's journal file in editor."
+    desc "open", "Open current year's journal file in editor."
+    option :marked, :aliases => :m, :type => :boolean
     def open
-      %x{open -a "#{editor}" #{file}}
+      if options[:marked]
+        %x{open -a Marked #{file}}
+      else
+        %x{open -a "#{editor}" #{file}}
+      end
     end
 
     desc "config", "Change Nikki's settings."
     option :editor, :aliases => :e
+    option :yesterday, :aliases => :y, :type => :boolean
+    option :today, :aliases => :t, :type => :boolean
+    option :display, :aliases => :d, :type => :boolean
     def config
       settings = read_config
-      settings[:editor] = options[:editor] || 'TextEdit'
+      settings[:editor] = options[:editor] || read_config[:editor]
+      settings[:updated] = Date.today-1 if options[:yesterday]
+      settings[:updated] = Date.today if options[:today]
+      puts settings.to_yaml
       write_config(settings)
     end
 
     no_commands do
       def path
-        dropbox = Pathname.new("#{ENV['HOME']}/Dropbox/")
         home = Pathname.new("#{ENV['HOME']}/")
-        path = dropbox.exist? ? dropbox : home
       end
 
       def config_file
@@ -78,6 +88,10 @@ module Nikki
 
       def create_file
         FileUtils.touch(file)
+      end
+
+      def marked
+        Pathname.new("/Applications/Marked.app")
       end
 
       def today
