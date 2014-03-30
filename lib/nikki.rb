@@ -19,7 +19,9 @@ class Generator < Thor
     settings = read_config
     settings[:updated] = today
     entry = args.join(" ")
-    write_file(entry)
+    entry_hash = { Date.today => entry }
+    journal = read_file.merge(entry_hash)
+    write_file(journal)
     open unless updated_yesterday?
     write_config(settings)
     puts latest
@@ -80,8 +82,8 @@ class Generator < Thor
       YAML.load(file.read)
     end
 
-    def write_file(text)
-      file.open('a') { |f| f.puts "#{today}: #{text}" }
+    def write_file(hash)
+      file.write(hash.to_yaml)
     end
 
     def editor
@@ -148,7 +150,7 @@ class Generator < Thor
 
     def latest
       list = []
-      (0..6).each do |n|
+      (0..3).each do |n|
         list << "#{today-n}: #{read_file[today-n]}"
       end
       list.reverse!
