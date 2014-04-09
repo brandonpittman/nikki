@@ -19,7 +19,7 @@ class Generator < Thor
     settings = read_config
     settings[:updated] = today
     entry = args.join(" ")
-    entry_hash = { Date.today => entry }
+    entry_hash = { last_updated + 1 => entry }
     journal = read_file.merge(entry_hash)
     write_file(journal)
     open unless updated_yesterday?
@@ -144,8 +144,12 @@ class Generator < Thor
       Date.today.leap?
     end
 
+    def last_updated
+      read_config[:updated]
+    end
+
     def updated_yesterday?
-      read_config[:updated] == Date.today-1
+      last_updated == Date.today-1
     end
 
     def latest
