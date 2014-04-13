@@ -25,6 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "cucumber"
   spec.add_development_dependency "aruba"
-  spec.add_development_dependency "rspec", ">= 3.0"
-  spec.add_development_dependency "rspec-its"
+  spec.add_development_dependency "rspec"
 end

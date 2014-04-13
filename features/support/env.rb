@@ -1,5 +1,5 @@
-# require "aruba/cucumber"
-# require "fileutils"
+require "aruba/cucumber"
+require "fileutils"
 
 # Before do
 #   @real_home = ENV['HOME']
