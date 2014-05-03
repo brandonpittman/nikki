@@ -5,4 +5,4 @@ Feature: Look up random journal entry
 Scenario: look up random entry
   Given a file named "nikki.yaml"
   When I run random
-  Then STDOUT should contain a journal entry
+  Then STDOUT should match "\d{4}-\d{2}-\d{2}: .+\."

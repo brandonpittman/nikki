@@ -2,8 +2,6 @@ require "time"
 require "pathname"
 require "nikki"
 
-include Nikki
-
 class Journal
   def last_updated
     Date.today
