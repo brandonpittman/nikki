@@ -24,6 +24,7 @@ class Generator < Thor
     write_file(journal)
     open unless updated_yesterday?
     write_config(settings)
+    add_to_omnifocus
     puts latest
   end
 
@@ -158,6 +159,17 @@ class Generator < Thor
         list << "#{today-n}: #{read_file[today-n]}"
       end
       list.reverse!
+    end
+
+    def add_to_omnifocus
+      %x{osascript <<-APPLESCRIPT
+      tell application "OmniFocus"
+        tell default document
+          set nikki_task to first task of flattened project "Evening" whose name is "Record what I learned today"
+          set completed of nikki_task to true
+        end tell
+      end tell
+      APPLESCRIPT}
     end
   end
 end
