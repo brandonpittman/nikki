@@ -4,9 +4,13 @@ require "yaml"
 require "date"
 require 'fileutils'
 
+# @author Brandon Pittman
+# This is the main class that interfaces with Thor's methods and does all the heavy lifting for Nikki.
 class Generator < Thor
 
   desc "setup", "Creates new Nikki and config files."
+  # Setup up Nikki for use
+  # @note This methods creates the ".nikki" directory, config file and journal file.
   def setup
     create_path
     create_file
@@ -14,7 +18,13 @@ class Generator < Thor
   end
 
   desc "new ENTRY", "Creates a new entry in the Nikki journal."
-  option :print, :aliases => :p, :type => :boolean, :banner => "Will print saved entry."
+  # Add entry to journal
+  # @param entry [String] entry to add to the journal
+  # Will open your configured text editor on OS X if you didn't update the journal the previous day.
+  # This will allow you to add missing entries in bulk.
+  # It reads the settings in from the config YAML file and changes the date updated.
+  # It does the same with the journal file, reading in the YAML and merging the hash of entries, and then saves the YAML back again.
+  # There's also a method to check off a corresponding task in OmniFocus at the end.
   def new(*args)
     settings = read_config
     settings[:updated] = today
@@ -30,6 +40,7 @@ class Generator < Thor
 
   desc "open", "Open current year's journal file in editor."
   option :marked, :aliases => :m, :type => :boolean
+  # Open Nikki journal in configured text editor
   def open
     if options[:marked]
       %x{open -a Marked #{file}}
@@ -43,7 +54,13 @@ class Generator < Thor
   option :yesterday, :aliases => :y, :type => :boolean, :banner => "Set nikki's \"updated\" date to yesterday."
   option :today, :aliases => :t, :type => :boolean, :banner => "Set nikki's \"updated\" date to today."
   option :print, :aliases => :p, :type => :boolean, :banner => "Prints nikki's config settings."
-  option :latest, :aliases => :l, :type => :boolean, :banner => "Prints last seven journal entries."
+  option :latest, :aliases => :l, :type => :boolean, :banner => "Prints latest journal entries."
+  # Configure Nikki's settings
+  # @option options [String] :editor (read_config[:editor]) Sets Nikki's editor to open journal file
+  # @option options [Boolean] :yesterday Set `settings[:updated]` to yesterday
+  # @option options [Boolean] :today Set `settings[:updated]` to today
+  # @option options [Boolean] :print Prints Nikki's configuration settings to STDOUT
+  # @option options [Boolean] :latest Prints Nikki's latest entries to STDOUT
   def config
     settings = read_config
     settings[:editor] = options[:editor] || read_config[:editor]
@@ -163,12 +180,12 @@ class Generator < Thor
 
     def add_to_omnifocus
       %x{osascript <<-APPLESCRIPT
-      tell application "OmniFocus"
-        tell default document
-          set nikki_task to first task of flattened project "Evening" whose name is "Record what I learned today"
-          set completed of nikki_task to true
+        tell application "OmniFocus"
+          tell default document
+            set nikki_task to first remaining task of flattened context "House" whose name is "Record what I learned today"
+            set completed of nikki_task to true
+          end tell
         end tell
-      end tell
       APPLESCRIPT}
     end
   end

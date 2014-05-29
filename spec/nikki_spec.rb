@@ -14,8 +14,4 @@ describe Generator do
   it "knows the date of the last updated" do
     expect(gen.last_updated.class).to eq(Date)
   end
-
-  it "sets new entries' date to :last_update + 1" do
-    expect(gen.last_updated+1).to eq(Date.today)
-  end
 end
