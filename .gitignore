@@ -4,10 +4,10 @@
 .config
 Gemfile.lock
 InstalledFiles
+tags
 coverage
 lib/bundler/man
 pkg
 spec/reports
 tmp
-.codekit
 .DS_STORE
