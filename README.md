@@ -28,7 +28,8 @@ Or install it yourself as:
     nikki config          # Change Nikki's settings.
     nikki help [COMMAND]  # Describe available commands or one specific command
     nikki new ENTRY       # Creates a new entry in the Nikki journal.
-    nikki open            # Opens current year's journal file in editor.
+    nikki open            # Open current year's journal file in editor.
+    nikki setup           # Creates new Nikki and config files.
 
 ## Contributing
 
