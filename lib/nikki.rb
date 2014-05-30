@@ -6,11 +6,11 @@ require 'fileutils'
 
 # @author Brandon Pittman
 # This is the main class that interfaces with Thor's methods and does all the heavy lifting for Nikki.
+# It's a bit of a "God" object. Sorries.
 class Generator < Thor
 
   desc "setup", "Creates new Nikki and config files."
-  # Setup up Nikki for use
-  # @note This methods creates the ".nikki" directory, config file and journal file.
+  # This methods creates the ".nikki" directory, config file and journal file.
   def setup
     create_path
     create_file
@@ -56,11 +56,11 @@ class Generator < Thor
   option :print, :aliases => :p, :type => :boolean, :banner => "Prints nikki's config settings."
   option :latest, :aliases => :l, :type => :boolean, :banner => "Prints latest journal entries."
   # Configure Nikki's settings
-  # @option options [String] :editor (read_config[:editor]) Sets Nikki's editor to open journal file
-  # @option options [Boolean] :yesterday Set `settings[:updated]` to yesterday
-  # @option options [Boolean] :today Set `settings[:updated]` to today
-  # @option options [Boolean] :print Prints Nikki's configuration settings to STDOUT
-  # @option options [Boolean] :latest Prints Nikki's latest entries to STDOUT
+  # @param --editor [String] (read_config[:editor]) Sets Nikki's editor to open journal file
+  # @param --yesterday Set `settings[:updated]` to yesterday
+  # @param --today Set `settings[:updated]` to today
+  # @param --print Prints Nikki's configuration settings to STDOUT
+  # @param --latest Prints Nikki's latest entries to STDOUT
   def config
     settings = read_config
     settings[:editor] = options[:editor] || read_config[:editor]
