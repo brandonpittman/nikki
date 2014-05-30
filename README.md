@@ -31,6 +31,15 @@ Or install it yourself as:
     nikki open            # Open current year's journal file in editor.
     nikki setup           # Creates new Nikki and config files.
 
+## Examples
+
+### New entry
+    nikki new "Brandon Pittman is a super cool guy."
+
+### Configure Nikki
+    nikki config --yesterday  # Reset last updated `datetime`
+    nikki config --list       # Prints latest entries
+
 ## Contributing
 
 1. Fork it ( http://github.com/<my-github-username>/nikki/fork )
