@@ -2,7 +2,6 @@ $LOAD_PATH << File.expand_path('../../../lib', __FILE__)
 
 require "aruba/cucumber"
 require "fileutils"
-require "cucumber/rspec/doubles"
 
 # Before do
 #   @real_home = ENV['HOME']
