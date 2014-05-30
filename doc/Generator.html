@@ -1,0 +1,596 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Generator
+  
+    &mdash; Documentation by YARD 0.8.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/cucumber.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!Generator.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/cucumber.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (G)</a> &raquo;
+    
+    
+    <span class="title">Generator</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="feature_list_link"
+        href="feature_list.html">
+      Features
+    </a>
+  
+    <a class="full_list_link" id="tag_list_link"
+        href="tag_list.html">
+      Tags
+    </a>
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Generator
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Thor</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Thor</li>
+          
+            <li class="next">Generator</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/nikki.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the main class that interfaces with Thor&#39;s methods and does all
+the heavy lifting for Nikki. It&#39;s a bit of a “God” object. Sorries.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Brandon Pittman</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#config-instance_method" title="#config (instance method)">- (Object) <strong>config</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Configure Nikki&#39;s settings.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Object) <strong>new</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add entry to journal Will open your configured text editor on OS X if you
+didn&#39;t update the journal the previous day.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open-instance_method" title="#open (instance method)">- (Object) <strong>open</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Open Nikki journal in configured text editor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#setup-instance_method" title="#setup (instance method)">- (Object) <strong>setup</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This methods creates the “.nikki” directory, config file and journal file.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="config-instance_method">
+  
+    - (<tt>Object</tt>) <strong>config</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Configure Nikki&#39;s settings</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>--editor</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>(<a href=":editor">read_config</a>) Sets Nikki&#39;s editor to open journal
+file</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>--yesterday</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Set `<a href=":updated">settings</a>` to yesterday</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>--today</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Set `<a href=":updated">settings</a>` to today</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>--print</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Prints Nikki&#39;s configuration settings to STDOUT</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>--latest</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Prints Nikki&#39;s latest entries to STDOUT</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_config'>config</span>
+  <span class='id identifier rubyid_settings'>settings</span> <span class='op'>=</span> <span class='id identifier rubyid_read_config'>read_config</span>
+  <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:editor</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:editor</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_read_config'>read_config</span><span class='lbracket'>[</span><span class='symbol'>:editor</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:updated</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='op'>-</span><span class='int'>1</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:yesterday</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:updated</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:today</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_write_config'>write_config</span><span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_settings'>settings</span><span class='period'>.</span><span class='id identifier rubyid_to_yaml'>to_yaml</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:print</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_latest'>latest</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:latest</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    - (<tt>Object</tt>) <strong>new</strong>(*args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add entry to journal Will open your configured text editor on OS X if you
+didn&#39;t update the journal the previous day. This will allow you to add
+missing entries in bulk. It reads the settings in from the config YAML file
+and changes the date updated. It does the same with the journal file,
+reading in the YAML and merging the hash of entries, and then saves the
+YAML back again. There&#39;s also a method to check off a corresponding
+task in OmniFocus at the end.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>entry</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>entry to add to the journal</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_settings'>settings</span> <span class='op'>=</span> <span class='id identifier rubyid_read_config'>read_config</span>
+  <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:updated</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_today'>today</span>
+  <span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_entry_hash'>entry_hash</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_today'>today</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_entry'>entry</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_journal'>journal</span> <span class='op'>=</span> <span class='id identifier rubyid_read_file'>read_file</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_entry_hash'>entry_hash</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_write_file'>write_file</span><span class='lparen'>(</span><span class='id identifier rubyid_journal'>journal</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_open'>open</span> <span class='kw'>unless</span> <span class='id identifier rubyid_updated_yesterday?'>updated_yesterday?</span>
+  <span class='id identifier rubyid_write_config'>write_config</span><span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_to_omnifocus'>add_to_omnifocus</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_latest'>latest</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open-instance_method">
+  
+    - (<tt>Object</tt>) <strong>open</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Open Nikki journal in configured text editor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 44</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_open'>open</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:marked</span><span class='rbracket'>]</span>
+    <span class='backtick'>%x{</span><span class='tstring_content'>open -a Marked </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file'>file</span><span class='embexpr_end'>}</span><span class='tstring_end'>}</span></span>
+  <span class='kw'>else</span>
+    <span class='backtick'>%x{</span><span class='tstring_content'>open -a &quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_editor'>editor</span><span class='embexpr_end'>}</span><span class='tstring_content'>&quot; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file'>file</span><span class='embexpr_end'>}</span><span class='tstring_end'>}</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="setup-instance_method">
+  
+    - (<tt>Object</tt>) <strong>setup</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This methods creates the “.nikki” directory, config file and journal file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_setup'>setup</span>
+  <span class='id identifier rubyid_create_path'>create_path</span>
+  <span class='id identifier rubyid_create_file'>create_file</span>
+  <span class='id identifier rubyid_create_config_file'>create_config_file</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Fri May 30 09:21:12 2014 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.4 (ruby-2.1.2).
+</div>
+
+  </body>
+</html>
