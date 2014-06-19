@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/nikki.png)](http://badge.fury.io/rb/nikki)
-[![Inline docs](http://inch-pages.github.io/github/brandonpittman/nikki.png)](http://inch-pages.github.io/github/brandonpittman/nikki)
+[![Inline docs](http://inch-ci.org/github/brandonpittman/nikki.png)](http://inch-ci.org/github/brandonpittman/nikki)
 
 # nikki
 
