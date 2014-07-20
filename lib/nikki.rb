@@ -5,8 +5,8 @@ require "date"
 require 'fileutils'
 
 # @author Brandon Pittman
-# This is the main class that interfaces with Thor's methods and does all the heavy lifting for Nikki.
-# It's a bit of a "God" object. Sorries.
+# This is the main class that interfaces with Thor's methods and does all the
+# heavy lifting for Nikki.  It's a bit of a "God" object. Sorries.
 class Generator < Thor
 
   desc "setup", "Creates new Nikki and config files."
@@ -19,16 +19,21 @@ class Generator < Thor
 
   desc "new ENTRY", "Creates a new entry in the Nikki journal."
   # Add entry to journal
-  # @param entry [String] entry to add to the journal
-  # Will open your configured text editor on OS X if you didn't update the journal the previous day.
-  # This will allow you to add missing entries in bulk.
-  # It reads the settings in from the config YAML file and changes the date updated.
-  # It does the same with the journal file, reading in the YAML and merging the hash of entries, and then saves the YAML back again.
-  # There's also a method to check off a corresponding task in OmniFocus at the end.
-  def new(*args)
+  # @param --entry [String] entry to add to the journal
+  # @return [Hash] Returns a Hash which is then saved in a YAML file.
+  # @example
+  #   "nikki new 'This is a thing I learned today!'"
+  # Will open your configured text editor on OS X if you didn't update the
+  # journal the previous day.  This will allow you to add missing entries in
+  # bulk.  It reads the settings in from the config YAML file and changes the
+  # date updated.  It does the same with the journal file, reading in the YAML
+  # and merging the hash of entries, and then saves the YAML back again.
+  # There's also a method to check off a corresponding task in OmniFocus at the
+  # end.
+  def new(*entry)
     settings = read_config
     settings[:updated] = today
-    entry = args.join(" ")
+    entry = entry.join(" ")
     entry_hash = { today => entry }
     journal = read_file.merge(entry_hash)
     write_file(journal)
@@ -39,15 +44,18 @@ class Generator < Thor
   end
 
   desc "open", "Open current year's journal file in editor."
-  option :marked, :aliases => :m, :type => :boolean
   # Open Nikki journal in configured text editor
   def open
-    if options[:marked]
-      %x{open -a Marked #{file}}
-    else
-      %x{open -a "#{editor}" #{file}}
-    end
+    %x{open -a "#{editor}" #{file}}
   end
+
+  desc "ls", "Displays latest Nikki entries."
+  # Display Nikki's latest entires
+  # @return [String]
+  def ls
+    puts latest
+  end
+
 
   desc "config", "Change Nikki's settings."
   option :editor, :aliases => :e, :banner => "Set default editor to open journal file in."
@@ -56,11 +64,12 @@ class Generator < Thor
   option :print, :aliases => :p, :type => :boolean, :banner => "Prints nikki's config settings."
   option :latest, :aliases => :l, :type => :boolean, :banner => "Prints latest journal entries."
   # Configure Nikki's settings
-  # @param --editor [String] (read_config[:editor]) Sets Nikki's editor to open journal file
-  # @param --yesterday Set `settings[:updated]` to yesterday
-  # @param --today Set `settings[:updated]` to today
-  # @param --print Prints Nikki's configuration settings to STDOUT
-  # @param --latest Prints Nikki's latest entries to STDOUT
+  # @param [Hash] options The options for configuring Nikki
+  # @option options :editor [String] (read_config[:editor]) Sets Nikki's editor to open journal file
+  # @option options :yesterday [Boolean] Set `settings[:updated]` to yesterday
+  # @option options :today [Boolean] Set `settings[:updated]` to today
+  # @option options :print [Boolean] Prints Nikki's configuration settings to STDOUT
+  # @option options :latest [Boolean] Prints Nikki's latest entries to STDOUT
   def config
     settings = read_config
     settings[:editor] = options[:editor] || read_config[:editor]
