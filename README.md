@@ -29,6 +29,7 @@ Or install it yourself as:
     nikki help [COMMAND]  # Describe available commands or one specific command
     nikki new ENTRY       # Creates a new entry in the Nikki journal.
     nikki open            # Open current year's journal file in editor.
+    nikki publish YEAR    # Save a MultiMarkdown-formatted version of a Nikki journal.
     nikki setup           # Creates new Nikki and config files.
 
 ## Examples
