@@ -56,7 +56,6 @@ class Generator < Thor
     puts latest
   end
 
-
   desc "config", "Change Nikki's settings."
   option :editor, :aliases => :e, :banner => "Set default editor to open journal file in."
   option :yesterday, :aliases => :y, :type => :boolean, :banner => "Set nikki's \"updated\" date to yesterday."
@@ -78,6 +77,13 @@ class Generator < Thor
     write_config(settings)
     puts settings.to_yaml if options[:print]
     puts latest if options[:latest]
+  end
+
+  desc "publish YEAR", "Save Nikki journal from YEAR as Markdown"
+  def publish(year)
+    md_path = "#{path}nikki_markdown_#{Date.today}.md"
+    IO.write(md_path, markdown(read_file, year.to_i))
+    puts "Markdown saved to \"#{md_path}\"."
   end
 
   no_commands do
@@ -154,17 +160,17 @@ class Generator < Thor
 
     def months_with_names
       {1=>{:name=>"January"},
-      2=>{:name=>"February"},
-      3=>{:name=>"March"},
-      4=>{:name=>"April"},
-      5=>{:name=>"May"},
-      6=>{:name=>"June"},
-      7=>{:name=>"July"},
-      8=>{:name=>"August"},
-      9=>{:name=>"September"},
-      10=>{:name=>"October"},
-      11=>{:name=>"November"},
-      12=>{:name=>"December"}}
+       2=>{:name=>"February"},
+       3=>{:name=>"March"},
+       4=>{:name=>"April"},
+       5=>{:name=>"May"},
+       6=>{:name=>"June"},
+       7=>{:name=>"July"},
+       8=>{:name=>"August"},
+       9=>{:name=>"September"},
+       10=>{:name=>"October"},
+       11=>{:name=>"November"},
+       12=>{:name=>"December"}}
     end
 
     def leap_year?
@@ -185,6 +191,16 @@ class Generator < Thor
         list << "#{today-n}: #{read_file[today-n]}"
       end
       list.reverse!
+    end
+
+    def markdown(hash, year)
+      string = ""
+      hash.each_pair do |date, sentence|
+        if date.year == year
+          string += "#{date}\n:  #{sentence}\n"
+        end
+      end
+      string
     end
 
     def add_to_omnifocus
