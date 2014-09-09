@@ -80,6 +80,10 @@ class Generator < Thor
   end
 
   desc "publish YEAR", "Save Nikki journal from YEAR as Markdown"
+  # @param [String] year of journal entries you wish to pubish as Markdown This
+  # method calls the `markdown` method and creates a MultiMarkdown document
+  # with one big description list.  This format is subject to change, but for
+  # now, it seems good enough.
   def publish(year)
     md_path = "#{path}nikki_markdown_#{Date.today}.md"
     IO.write(md_path, markdown(read_file, year.to_i))
