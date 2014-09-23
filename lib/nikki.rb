@@ -211,7 +211,7 @@ class Generator < Thor
       %x{osascript <<-APPLESCRIPT
         tell application "OmniFocus"
           tell default document
-            set nikki_task to first remaining task of flattened context "House" whose name is "Record what I learned today"
+            set nikki_task to first remaining task of flattened context "Home" whose name is "Record what I learned today"
             set completed of nikki_task to true
           end tell
         end tell
