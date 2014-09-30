@@ -209,7 +209,31 @@ the heavy lifting for Nikki.  It&#39;s a bit of a “God” object. Sorries.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#new-instance_method" title="#new (instance method)">- (Hash) <strong>new</strong>(*entry) </a>
+      <a href="#missed-instance_method" title="#missed (instance method)">- (Object) <strong>missed</strong>(entry) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new entry for yesterday.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Hash) <strong>new</strong>(entry, update = nil) </a>
     
 
     
@@ -362,18 +386,18 @@ with one big description list.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80</pre>
+85
+86
+87
+88
+89
+90
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_config'>config</span>
   <span class='id identifier rubyid_settings'>settings</span> <span class='op'>=</span> <span class='id identifier rubyid_read_config'>read_config</span>
@@ -428,12 +452,12 @@ with one big description list.</p>
       <pre class="lines">
 
 
-55
-56
-57</pre>
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ls'>ls</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_latest'>latest</span>
@@ -444,9 +468,65 @@ with one big description list.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="missed-instance_method">
+  
+    - (<tt>Object</tt>) <strong>missed</strong>(entry) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new entry for yesterday</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>entry</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_missed'>missed</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="new-instance_method">
   
-    - (<tt>Hash</tt>) <strong>new</strong>(*entry) 
+    - (<tt>Hash</tt>) <strong>new</strong>(entry, update = nil) 
   
 
   
@@ -480,7 +560,7 @@ task in OmniFocus at the end.</p>
   
     <li>
       
-        <span class='name'>--entry</span>
+        <span class='name'>entry</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -490,6 +570,24 @@ task in OmniFocus at the end.</p>
         &mdash;
         <div class='inline'>
 <p>entry to add to the journal</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>update</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>International date for update</p>
 </div>
       
     </li>
@@ -521,7 +619,6 @@ task in OmniFocus at the end.</p>
       <pre class="lines">
 
 
-33
 34
 35
 36
@@ -532,16 +629,27 @@ task in OmniFocus at the end.</p>
 41
 42
 43
-44</pre>
+44
+45
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 34</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_entry'>entry</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='comma'>,</span> <span class='id identifier rubyid_update'>update</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_settings'>settings</span> <span class='op'>=</span> <span class='id identifier rubyid_read_config'>read_config</span>
-  <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:updated</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_today'>today</span>
-  <span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_entry_hash'>entry_hash</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_today'>today</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_entry'>entry</span> <span class='rbrace'>}</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_update'>update</span>
+    <span class='id identifier rubyid_date'>date</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_update'>update</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:updated</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_date'>date</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_date'>date</span> <span class='op'>=</span> <span class='id identifier rubyid_today'>today</span>
+    <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:updated</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_today'>today</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_entry_hash'>entry_hash</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_date'>date</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_entry'>entry</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_journal'>journal</span> <span class='op'>=</span> <span class='id identifier rubyid_read_file'>read_file</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_entry_hash'>entry_hash</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_write_file'>write_file</span><span class='lparen'>(</span><span class='id identifier rubyid_journal'>journal</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_open'>open</span> <span class='kw'>unless</span> <span class='id identifier rubyid_updated_yesterday?'>updated_yesterday?</span>
@@ -580,12 +688,12 @@ task in OmniFocus at the end.</p>
       <pre class="lines">
 
 
-48
-49
-50</pre>
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_open'>open</span>
   <span class='backtick'>%x{</span><span class='tstring_content'>open -a &quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_editor'>editor</span><span class='embexpr_end'>}</span><span class='tstring_content'>&quot; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file'>file</span><span class='embexpr_end'>}</span><span class='tstring_end'>}</span></span>
@@ -643,14 +751,14 @@ now, it seems good enough.</p>
       <pre class="lines">
 
 
-87
-88
-89
-90
-91</pre>
+100
+101
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_publish'>publish</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_md_path'>md_path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='embexpr_end'>}</span><span class='tstring_content'>nikki_markdown_</span><span class='embexpr_beg'>#{</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='embexpr_end'>}</span><span class='tstring_content'>.md</span><span class='tstring_end'>&quot;</span></span>
@@ -712,7 +820,7 @@ now, it seems good enough.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Sep  9 16:01:49 2014 by
+  Generated on Tue Sep 30 15:46:41 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.4 (ruby-2.1.2).
 </div>

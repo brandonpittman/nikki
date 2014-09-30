@@ -19,7 +19,8 @@ class Generator < Thor
 
   desc "new ENTRY", "Creates a new entry in the Nikki journal."
   # Add entry to journal
-  # @param --entry [String] entry to add to the journal
+  # @param entry [String] entry to add to the journal
+  # @param update [String] International date for update
   # @return [Hash] Returns a Hash which is then saved in a YAML file.
   # @example
   #   "nikki new 'This is a thing I learned today!'"
@@ -30,17 +31,29 @@ class Generator < Thor
   # and merging the hash of entries, and then saves the YAML back again.
   # There's also a method to check off a corresponding task in OmniFocus at the
   # end.
-  def new(*entry)
+  def new(entry, update=nil)
     settings = read_config
-    settings[:updated] = today
-    entry = entry.join(" ")
-    entry_hash = { today => entry }
+    if update
+      date = Date.parse(update)
+      settings[:updated] = date
+    else
+      date = today
+      settings[:updated] = today
+    end
+    entry_hash = { date => entry }
     journal = read_file.merge(entry_hash)
     write_file(journal)
     open unless updated_yesterday?
     write_config(settings)
     add_to_omnifocus
     puts latest
+  end
+
+  desc "missed", "Create new entry for yesterday"
+  # Creates a new entry for yesterday
+  # @param entry [String]
+  def missed(entry)
+    new(entry, (Date.today-1).to_s)
   end
 
   desc "open", "Open current year's journal file in editor."
@@ -160,6 +173,10 @@ class Generator < Thor
 
     def today
       Date.today
+    end
+
+    def yesterday
+      Date.today-1
     end
 
     def months_with_names
