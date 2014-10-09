@@ -152,6 +152,97 @@ the heavy lifting for Nikki.  It&#39;s a bit of a “God” object. Sorries.</p>
 
   
     <h2>
+      Initial Setup
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#setup-instance_method" title="#setup (instance method)">- (Object) <strong>setup</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This methods creates the “.nikki” directory, config file and journal file.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Data entry
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#missed-instance_method" title="#missed (instance method)">- (Object) <strong>missed</strong>(entry) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new entry for yesterday.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Hash) <strong>new</strong>(entry, update = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add entry to journal Will open your configured text editor on OS X if you
+didn&#39;t update the journal the previous day.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
       Instance Method Summary
       <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
     </h2>
@@ -209,55 +300,6 @@ the heavy lifting for Nikki.  It&#39;s a bit of a “God” object. Sorries.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#missed-instance_method" title="#missed (instance method)">- (Object) <strong>missed</strong>(entry) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new entry for yesterday.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#new-instance_method" title="#new (instance method)">- (Hash) <strong>new</strong>(entry, update = nil) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Add entry to journal Will open your configured text editor on OS X if you
-didn&#39;t update the journal the previous day.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#open-instance_method" title="#open (instance method)">- (Object) <strong>open</strong> </a>
     
 
@@ -299,30 +341,6 @@ didn&#39;t update the journal the previous day.</p>
     <span class="summary_desc"><div class='inline'>
 <p>method calls the `markdown` method and creates a MultiMarkdown document
 with one big description list.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#setup-instance_method" title="#setup (instance method)">- (Object) <strong>setup</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>This methods creates the “.nikki” directory, config file and journal file.</p>
 </div></span>
   
 </li>
@@ -386,18 +404,18 @@ with one big description list.</p>
       <pre class="lines">
 
 
-85
-86
-87
-88
-89
-90
-91
-92
-93</pre>
+93
+94
+95
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_config'>config</span>
   <span class='id identifier rubyid_settings'>settings</span> <span class='op'>=</span> <span class='id identifier rubyid_read_config'>read_config</span>
@@ -452,12 +470,12 @@ with one big description list.</p>
       <pre class="lines">
 
 
-68
-69
-70</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ls'>ls</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_latest'>latest</span>
@@ -501,6 +519,22 @@ with one big description list.</p>
   
 </ul>
 
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>0.5.3</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -508,12 +542,12 @@ with one big description list.</p>
       <pre class="lines">
 
 
-55
-56
-57</pre>
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_missed'>missed</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
@@ -619,11 +653,6 @@ task in OmniFocus at the end.</p>
       <pre class="lines">
 
 
-34
-35
-36
-37
-38
 39
 40
 41
@@ -635,10 +664,15 @@ task in OmniFocus at the end.</p>
 47
 48
 49
-50</pre>
+50
+51
+52
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='comma'>,</span> <span class='id identifier rubyid_update'>update</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_settings'>settings</span> <span class='op'>=</span> <span class='id identifier rubyid_read_config'>read_config</span>
@@ -688,12 +722,12 @@ task in OmniFocus at the end.</p>
       <pre class="lines">
 
 
-61
-62
-63</pre>
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_open'>open</span>
   <span class='backtick'>%x{</span><span class='tstring_content'>open -a &quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_editor'>editor</span><span class='embexpr_end'>}</span><span class='tstring_content'>&quot; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file'>file</span><span class='embexpr_end'>}</span><span class='tstring_end'>}</span></span>
@@ -751,14 +785,14 @@ now, it seems good enough.</p>
       <pre class="lines">
 
 
-100
-101
-102
-103
-104</pre>
+108
+109
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_publish'>publish</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_md_path'>md_path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='embexpr_end'>}</span><span class='tstring_content'>nikki_markdown_</span><span class='embexpr_beg'>#{</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='embexpr_end'>}</span><span class='tstring_content'>.md</span><span class='tstring_end'>&quot;</span></span>
@@ -796,14 +830,14 @@ now, it seems good enough.</p>
       <pre class="lines">
 
 
-14
-15
 16
 17
-18</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/nikki.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_setup'>setup</span>
   <span class='id identifier rubyid_create_path'>create_path</span>
@@ -820,7 +854,7 @@ now, it seems good enough.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Sep 30 15:46:41 2014 by
+  Generated on Tue Sep 30 15:59:19 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.4 (ruby-2.1.2).
 </div>

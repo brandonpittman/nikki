@@ -9,6 +9,8 @@ require 'fileutils'
 # heavy lifting for Nikki.  It's a bit of a "God" object. Sorries.
 class Generator < Thor
 
+  # @!group Initial Setup
+
   desc "setup", "Creates new Nikki and config files."
   # This methods creates the ".nikki" directory, config file and journal file.
   def setup
@@ -17,6 +19,9 @@ class Generator < Thor
     create_config_file
   end
 
+  # @!endgroup
+
+  # @!group Data entry
   desc "new ENTRY", "Creates a new entry in the Nikki journal."
   # Add entry to journal
   # @param entry [String] entry to add to the journal
@@ -52,9 +57,11 @@ class Generator < Thor
   desc "missed", "Create new entry for yesterday"
   # Creates a new entry for yesterday
   # @param entry [String]
+  # @since 0.5.3
   def missed(entry)
     new(entry, (Date.today-1).to_s)
   end
+  # @!endgroup
 
   desc "open", "Open current year's journal file in editor."
   # Open Nikki journal in configured text editor
@@ -229,7 +236,10 @@ class Generator < Thor
         tell application "OmniFocus"
           tell default document
             set nikki_task to first remaining task of flattened context "Home" whose name is "Record what I learned today"
-            set completed of nikki_task to true
+            set deferDate to defer date of nikki_task
+            if weekday of (deferDate) is weekday of (current date) then
+              set completed of nikki_task to true
+            end if
           end tell
         end tell
       APPLESCRIPT}
