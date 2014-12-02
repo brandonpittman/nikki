@@ -1,17 +1,15 @@
 require 'thor'
-require "pathname"
-require "yaml"
-require "date"
+require 'pathname'
+require 'yaml'
+require 'date'
 require 'fileutils'
 
 # @author Brandon Pittman
 # This is the main class that interfaces with Thor's methods and does all the
 # heavy lifting for Nikki.  It's a bit of a "God" object. Sorries.
 class Generator < Thor
-
   # @!group Initial Setup
-
-  desc "setup", "Creates new Nikki and config files."
+  desc 'setup', 'Creates new Nikki and config files.'
   # This methods creates the ".nikki" directory, config file and journal file.
   def setup
     create_path
@@ -22,7 +20,7 @@ class Generator < Thor
   # @!endgroup
 
   # @!group Data entry
-  desc "new ENTRY", "Creates a new entry in the Nikki journal."
+  desc 'new ENTRY', 'Creates a new entry in the Nikki journal.'
   # Add entry to journal
   # @param entry [String] entry to add to the journal
   # @param update [String] International date for update
@@ -54,29 +52,29 @@ class Generator < Thor
     puts latest
   end
 
-  desc "missed", "Create new entry for yesterday"
+  desc 'missed', 'Create new entry for yesterday'
   # Creates a new entry for yesterday
   # @param entry [String]
   # @since 0.5.3
   def missed(entry)
-    new(entry, (Date.today-1).to_s)
+    new(entry, (Date.today - 1).to_s)
   end
   # @!endgroup
 
-  desc "open", "Open current year's journal file in editor."
+  desc 'open', "Open current year's journal file in editor."
   # Open Nikki journal in configured text editor
   def open
-    %x{open -a "#{editor}" #{file}}
+    `open -a "#{editor}" #{file}`
   end
 
-  desc "ls", "Displays latest Nikki entries."
+  desc 'ls', 'Displays latest Nikki entries.'
   # Display Nikki's latest entires
   # @return [String]
   def ls
     puts latest
   end
 
-  desc "config", "Change Nikki's settings."
+  desc 'config', "Change Nikki's settings."
   option :editor, :aliases => :e, :banner => "Set default editor to open journal file in."
   option :yesterday, :aliases => :y, :type => :boolean, :banner => "Set nikki's \"updated\" date to yesterday."
   option :today, :aliases => :t, :type => :boolean, :banner => "Set nikki's \"updated\" date to today."
@@ -92,14 +90,13 @@ class Generator < Thor
   def config
     settings = read_config
     settings[:editor] = options[:editor] || read_config[:editor]
-    settings[:updated] = Date.today-1 if options[:yesterday]
-    settings[:updated] = Date.today if options[:today]
+    settings[:updated] = options[:yesterday] ? Date.today - 1 : Date.today
     write_config(settings)
     puts settings.to_yaml if options[:print]
     puts latest if options[:latest]
   end
 
-  desc "publish YEAR", "Save Nikki journal from YEAR as Markdown"
+  desc 'publish YEAR', 'Save Nikki journal from YEAR as Markdown'
   # @param [String] year of journal entries you wish to pubish as Markdown This
   # method calls the `markdown` method and creates a MultiMarkdown document
   # with one big description list.  This format is subject to change, but for
@@ -120,7 +117,7 @@ class Generator < Thor
     end
 
     def config_file
-      path.join("nikki.config.yaml")
+      path.join('nikki.config.yaml')
     end
 
     def read_config
@@ -148,19 +145,19 @@ class Generator < Thor
     end
 
     def file
-      path.join("nikki.yaml")
+      path.join('nikki.yaml')
     end
 
     def config_file_exist?
       return true if config_file.exist?
       create_config_file
-      return true
+      true
     end
 
     def file_exist?
       return true if file.exist?
       create_file
-      return true
+      true
     end
 
     def create_config_file
@@ -175,7 +172,7 @@ class Generator < Thor
     end
 
     def marked
-      Pathname.new("/Applications/Marked.app")
+      Pathname.new('/Applications/Marked.app')
     end
 
     def today
@@ -183,22 +180,22 @@ class Generator < Thor
     end
 
     def yesterday
-      Date.today-1
+      Date.today - 1
     end
 
     def months_with_names
-      {1=>{:name=>"January"},
-       2=>{:name=>"February"},
-       3=>{:name=>"March"},
-       4=>{:name=>"April"},
-       5=>{:name=>"May"},
-       6=>{:name=>"June"},
-       7=>{:name=>"July"},
-       8=>{:name=>"August"},
-       9=>{:name=>"September"},
-       10=>{:name=>"October"},
-       11=>{:name=>"November"},
-       12=>{:name=>"December"}}
+      {1=>{:name=>'January'},
+       2=>{:name=>'February'},
+       3=>{:name=>'March'},
+       4=>{:name=>'April'},
+       5=>{:name=>'May'},
+       6=>{:name=>'June'},
+       7=>{:name=>'July'},
+       8=>{:name=>'August'},
+       9=>{:name=>'September'},
+       10=>{:name=>'October'},
+       11=>{:name=>'November'},
+       12=>{:name=>'December'}}
     end
 
     def leap_year?
@@ -210,29 +207,27 @@ class Generator < Thor
     end
 
     def updated_yesterday?
-      last_updated == Date.today-1
+      last_updated == Date.today - 1
     end
 
     def latest
       list = []
       (0..3).each do |n|
-        list << "#{today-n}: #{read_file[today-n]}"
+        list << "#{today - n}: #{read_file[today - n]}"
       end
       list.reverse!
     end
 
     def markdown(hash, year)
-      string = ""
+      string = ''
       hash.each_pair do |date, sentence|
-        if date.year == year
-          string += "#{date}\n:  #{sentence}\n"
-        end
+        string += "#{date}\n:  #{sentence}\n" if date.year == year
       end
       string
     end
 
     def add_to_omnifocus
-      %x{osascript <<-APPLESCRIPT
+      `osascript <<-APPLESCRIPT
         tell application "OmniFocus"
           tell default document
             set nikki_task to first remaining task of flattened context "Home" whose name is "Record what I learned today"
@@ -242,7 +237,7 @@ class Generator < Thor
             end if
           end tell
         end tell
-      APPLESCRIPT}
+      APPLESCRIPT`
     end
   end
 end
