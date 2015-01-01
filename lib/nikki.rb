@@ -236,6 +236,7 @@ class Generator < Thor
               set completed of nikki_task to true
             end if
           end tell
+          synchronize
         end tell
       APPLESCRIPT`
     end
