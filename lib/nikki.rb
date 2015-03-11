@@ -3,6 +3,7 @@ require 'pathname'
 require 'yaml'
 require 'date'
 require 'fileutils'
+require 'stickynotifications'
 
 # @author Brandon Pittman
 # This is the main class that interfaces with Thor's methods and does all the
@@ -48,7 +49,6 @@ class Generator < Thor
     write_file(journal)
     open unless updated_yesterday?
     write_config(settings)
-    add_to_omnifocus
     puts latest
   end
 
@@ -68,10 +68,19 @@ class Generator < Thor
   end
 
   desc 'ls', 'Displays latest Nikki entries.'
+  # option :sticky,
+  #        aliases: :s,
+  #        type: :string,
+  #        banner: 'Notify if not updated today'
   # Display Nikki's latest entires
   # @return [String]
+  # @option options :sticky [String]
+  #   Display Sticky Notification if Nikki hasn't been updated
   def ls
     puts latest
+    # StickyNotifications::Note.new.create(
+    #   "Nikki hasn't been updated today!", 'Nikki'
+    # )
   end
 
   desc 'config', "Change Nikki's settings."
@@ -101,10 +110,10 @@ class Generator < Thor
   # method calls the `markdown` method and creates a MultiMarkdown document
   # with one big description list.  This format is subject to change, but for
   # now, it seems good enough.
-  def publish(year)
-    md_path = "#{path}nikki_markdown_#{Date.today}.md"
-    IO.write(md_path, markdown(read_file, year.to_i))
-    puts "Markdown saved to \"#{md_path}\"."
+  def export(year)
+    export_path = "#{path}nikki_export_#{year}.yml"
+    IO.write(export_path, yamlize(read_file, year.to_i))
+    puts "Markdown saved to \"#{export_path}\"."
   end
 
   no_commands do
@@ -171,31 +180,12 @@ class Generator < Thor
       FileUtils.touch(file)
     end
 
-    def marked
-      Pathname.new('/Applications/Marked.app')
-    end
-
     def today
       Date.today
     end
 
     def yesterday
       Date.today - 1
-    end
-
-    def months_with_names
-      {1=>{:name=>'January'},
-       2=>{:name=>'February'},
-       3=>{:name=>'March'},
-       4=>{:name=>'April'},
-       5=>{:name=>'May'},
-       6=>{:name=>'June'},
-       7=>{:name=>'July'},
-       8=>{:name=>'August'},
-       9=>{:name=>'September'},
-       10=>{:name=>'October'},
-       11=>{:name=>'November'},
-       12=>{:name=>'December'}}
     end
 
     def leap_year?
@@ -218,27 +208,27 @@ class Generator < Thor
       list.reverse!
     end
 
-    def markdown(hash, year)
-      string = ''
+    def yamlize(hash, year)
+      string = "---\n"
       hash.each_pair do |date, sentence|
-        string += "#{date}\n:  #{sentence}\n" if date.year == year
+        string += "#{date}: #{sentence}\n" if date.year == year
       end
       string
     end
 
     def add_to_omnifocus
       `osascript <<-APPLESCRIPT
-        tell application "OmniFocus"
-          tell default document
-            set nikki_task to first remaining task of flattened context "Home" whose name is "Record what I learned today"
-            set deferDate to defer date of nikki_task
-            if weekday of (deferDate) is weekday of (current date) then
-              set completed of nikki_task to true
-            end if
-          end tell
-          synchronize
-        end tell
-      APPLESCRIPT`
+tell application "OmniFocus"
+  tell default document
+    set nikki_task to first remaining task of flattened context "Home" whose name is "Record what I learned today"
+    set deferDate to defer date of nikki_task
+    if weekday of (deferDate) is weekday of (current date) then
+      set completed of nikki_task to true
+    end if
+  end tell
+  synchronize
+end tell
+APPLESCRIPT`
     end
   end
 end
