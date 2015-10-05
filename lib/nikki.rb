@@ -31,8 +31,6 @@ class Generator < Thor
   # Reads the settings in from the config YAML file and changes the
   # date updated.  It does the same with the journal file, reading in the YAML
   # and merging the hash of entries, and then saves the YAML back again.
-  # There's also a method to check off a corresponding task in OmniFocus at the
-  # end.
   def new(entry, update=nil)
     settings = read_config
     if update
@@ -45,7 +43,7 @@ class Generator < Thor
     entry_hash = { date => entry }
     journal = read_file.merge(entry_hash)
     write_file(journal)
-    # open unless updated_yesterday?
+    open unless updated_yesterday?
     write_config(settings)
     puts latest
   end
@@ -66,19 +64,11 @@ class Generator < Thor
   end
 
   desc 'ls', 'Displays latest Nikki entries.'
-  # option :sticky,
-  #        aliases: :s,
-  #        type: :string,
-  #        banner: 'Notify if not updated today'
   # Display Nikki's latest entires
   # @return [String]
   # @option options :sticky [String]
-  #   Display Sticky Notification if Nikki hasn't been updated
   def ls
     puts latest
-    # StickyNotifications::Note.new.create(
-    #   "Nikki hasn't been updated today!", 'Nikki'
-    # )
   end
 
   desc 'config', "Change Nikki's settings."
@@ -103,15 +93,12 @@ class Generator < Thor
     puts latest if options[:latest]
   end
 
-  desc 'publish YEAR', 'Save Nikki journal from YEAR as Markdown'
-  # @param [String] year of journal entries you wish to pubish as Markdown This
-  # method calls the `markdown` method and creates a MultiMarkdown document
-  # with one big description list.  This format is subject to change, but for
-  # now, it seems good enough.
+  desc 'export YEAR', 'Export Nikki journal from YEAR as YAML'
+  # @param [String] year of journal entries you wish to export
   def export(year)
     export_path = "#{path}nikki_export_#{year}.yml"
     IO.write(export_path, yamlize(read_file, year.to_i))
-    puts "Markdown saved to \"#{export_path}\"."
+    puts "YAML saved to \"#{export_path}\"."
   end
 
   no_commands do
@@ -212,21 +199,6 @@ class Generator < Thor
         string += "#{date}: #{sentence}\n" if date.year == year
       end
       string
-    end
-
-    def add_to_omnifocus
-      `osascript <<-APPLESCRIPT
-tell application "OmniFocus"
-  tell default document
-    set nikki_task to first remaining task of flattened context "Home" whose name is "Record what I learned today"
-    set deferDate to defer date of nikki_task
-    if weekday of (deferDate) is weekday of (current date) then
-      set completed of nikki_task to true
-    end if
-  end tell
-  synchronize
-end tell
-APPLESCRIPT`
     end
   end
 end
