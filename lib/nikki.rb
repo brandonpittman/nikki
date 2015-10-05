@@ -28,9 +28,7 @@ class Generator < Thor
   # @return [Hash] Returns a Hash which is then saved in a YAML file.
   # @example
   #   "nikki new 'This is a thing I learned today!'"
-  # Will open your configured text editor on OS X if you didn't update the
-  # journal the previous day.  This will allow you to add missing entries in
-  # bulk.  It reads the settings in from the config YAML file and changes the
+  # Reads the settings in from the config YAML file and changes the
   # date updated.  It does the same with the journal file, reading in the YAML
   # and merging the hash of entries, and then saves the YAML back again.
   # There's also a method to check off a corresponding task in OmniFocus at the
@@ -47,7 +45,7 @@ class Generator < Thor
     entry_hash = { date => entry }
     journal = read_file.merge(entry_hash)
     write_file(journal)
-    open unless updated_yesterday?
+    # open unless updated_yesterday?
     write_config(settings)
     puts latest
   end
@@ -64,7 +62,7 @@ class Generator < Thor
   desc 'open', "Open current year's journal file in editor."
   # Open Nikki journal in configured text editor
   def open
-    `open -a "#{editor}" #{file}`
+    system(ENV['EDITOR'], file.to_s)
   end
 
   desc 'ls', 'Displays latest Nikki entries.'
