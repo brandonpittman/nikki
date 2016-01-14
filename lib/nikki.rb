@@ -40,7 +40,7 @@ class Generator < Thor
       date = today
       settings[:updated] = today
     end
-    entry_hash = { date => entry }
+    entry_hash = { date => "\"#{entry}\""}
     journal = read_file.merge(entry_hash)
     write_file(journal)
     open unless updated_yesterday?
@@ -196,7 +196,7 @@ class Generator < Thor
     def yamlize(hash, year)
       string = "---\n"
       hash.each_pair do |date, sentence|
-        string += "#{date}: #{sentence}\n" if date.year == year
+        string += "#{date}: \"#{sentence}\"\n" if date.year == year
       end
       string
     end
