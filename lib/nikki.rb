@@ -3,7 +3,6 @@ require 'pathname'
 require 'yaml'
 require 'date'
 require 'fileutils'
-require 'stickynotifications'
 
 # @author Brandon Pittman
 # This is the main class that interfaces with Thor's methods and does all the

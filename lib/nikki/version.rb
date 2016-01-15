@@ -1,5 +1,5 @@
 # Sets version for RubyGems
 module Nikki
   # Sets version for RubyGems
-  VERSION = '0.5.6'
+  VERSION = '0.5.7'
 end
