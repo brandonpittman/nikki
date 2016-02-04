@@ -39,7 +39,7 @@ class Generator < Thor
       date = today
       settings[:updated] = today
     end
-    entry_hash = { date => "\"#{entry}\""}
+    entry_hash = { date => entry.strip}
     journal = read_file.merge(entry_hash)
     write_file(journal)
     open unless updated_yesterday?
