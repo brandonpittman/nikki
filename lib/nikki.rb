@@ -8,8 +8,8 @@ require 'fileutils'
 # This is the main class that interfaces with Thor's methods and does all the
 # heavy lifting for Nikki.  It's a bit of a "God" object. Sorries.
 class Generator < Thor
-  NIKKI_PATH = "#{ENV['HOME']}/.nikki"
-  NIKKI_FILE = "#{ENV['HOME']}/.nikki/nikki.yaml"
+  NIKKI_PATH = "#{ENV['HOME']}/.nikki".freeze
+  NIKKI_FILE = "#{ENV['HOME']}/.nikki/nikki.yaml".freeze
 
   # @!group Data entry
   desc 'new ENTRY', 'Creates a new entry in the Nikki journal.'
@@ -63,7 +63,6 @@ class Generator < Thor
   desc 'export YEAR', 'Export Nikki journal from YEAR as YAML'
   # @param [String] year of journal entries you wish to export
   def export(export_year)
-    export_path = "#{NIKKI_PATH}/nikki_export_#{export_year}.yml"
     YAML::Store.new(NIKKI_FILE).transaction do |store|
       store['entries'].each do |entry|
         if entry.keys[0].year.to_s == export_year
@@ -71,7 +70,5 @@ class Generator < Thor
         end
       end
     end
-    # IO.write(export_path, yamlize(read_file, year.to_i))
-    # puts "YAML saved to \"#{export_path}\"."
   end
 end
