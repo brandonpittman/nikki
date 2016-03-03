@@ -25,25 +25,20 @@ Or install it yourself as:
 
 ## Usage
 
-    nikki config          # Change Nikki's settings.
     nikki help [COMMAND]  # Describe available commands or one specific command
     nikki new ENTRY       # Creates a new entry in the Nikki journal.
-    nikki open            # Open current year's journal file in editor.
-    nikki publish YEAR    # Save a MultiMarkdown-formatted version of a Nikki journal.
-    nikki setup           # Creates new Nikki and config files.
+    nikki open            # Open current year's journal file in Vim.
+    nikki export YEAR     # Save a MultiMarkdown-formatted version of a Nikki journal.
 
 ## Examples
 
 ### New entry
-    nikki new "Brandon Pittman is a super cool guy."
 
-### Configure Nikki
-    nikki config --yesterday  # Reset last updated `datetime`
-    nikki config --list       # Prints latest entries
+    nikki new "Brandon Pittman is a super cool guy."
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/nikki/fork )
+1. Fork it ( http://github.com/brandonpittman/nikki/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
