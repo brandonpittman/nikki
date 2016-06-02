@@ -8,8 +8,8 @@ require 'fileutils'
 # This is the main class that interfaces with Thor's methods and does all the
 # heavy lifting for Nikki.  It's a bit of a "God" object. Sorries.
 class Generator < Thor
-  NIKKI_PATH = "#{ENV['HOME']}/.nikki".freeze
-  NIKKI_FILE = "#{ENV['HOME']}/.nikki/nikki.yaml".freeze
+  FileUtils.mkdir_p("#{ENV['HOME']}/.config/nikki")
+  NIKKI_FILE = "#{ENV['HOME']}/.config/nikki/nikki.yaml".freeze
 
   # @!group Data entry
   desc 'new ENTRY', 'Creates a new entry in the Nikki journal.'
